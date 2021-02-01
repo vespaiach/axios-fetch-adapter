@@ -1,5 +1,9 @@
 import createError from 'axios/lib/core/createError';
 
+/**
+ * Fetch API stage two is to get response body. This funtion tries to retrieve
+ * response body based on response's type
+ */
 export default async function getResponse(request, config) {
     let stageOne;
     try {

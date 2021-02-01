@@ -4,8 +4,8 @@ import createRequest from './createRequest';
 import getResponse from './getResponse';
 
 /**
- * - Create a request
- * - Get response
+ * - Create a request object
+ * - Get response body
  * - Check if timeout
  */
 export default async function fetchAdapter(config) {

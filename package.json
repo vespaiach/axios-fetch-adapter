@@ -1,6 +1,6 @@
 {
     "name": "axios-fetch-adapter",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "Fetch adapter for axios",
     "main": "dist/adapter.js",
     "module": "dist/adapter.es.js",

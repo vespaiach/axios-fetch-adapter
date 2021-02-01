@@ -2,6 +2,9 @@ import buildURL from 'axios/lib/helpers/buildURL';
 import buildFullPath from 'axios/lib/core/buildFullPath';
 import { isUndefined } from 'axios/lib/utils';
 
+/**
+ * This function will create a Request object based on configuration's axios
+ */
 export default function createRequest(config) {
     const headers = new Headers(config.headers);
 
