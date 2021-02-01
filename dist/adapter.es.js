@@ -91,6 +91,104 @@ function createRequest(config) {
   return new Request(url, options);
 }
 
+function getResponse(_x, _x2) {
+  return _getResponse.apply(this, arguments);
+}
+
+function _getResponse() {
+  _getResponse = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(request, config) {
+    var stageOne, response;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return fetch(request);
+
+          case 3:
+            stageOne = _context.sent;
+            _context.next = 9;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](0);
+            return _context.abrupt("return", Promise.reject(createError('Network Error', config, null, request)));
+
+          case 9:
+            response = {
+              ok: stageOne.ok,
+              status: stageOne.status,
+              statusText: stageOne.statusText,
+              headers: new Headers(stageOne.headers),
+              // Make a copy of headers
+              config: config,
+              request: request
+            };
+
+            if (!(stageOne.status >= 200 && stageOne.status !== 204)) {
+              _context.next = 34;
+              break;
+            }
+
+            _context.t1 = config.responseType;
+            _context.next = _context.t1 === 'arraybuffer' ? 14 : _context.t1 === 'blob' ? 18 : _context.t1 === 'json' ? 22 : _context.t1 === 'formData' ? 26 : 30;
+            break;
+
+          case 14:
+            _context.next = 16;
+            return stageOne.arrayBuffer();
+
+          case 16:
+            response.data = _context.sent;
+            return _context.abrupt("break", 34);
+
+          case 18:
+            _context.next = 20;
+            return stageOne.blob();
+
+          case 20:
+            response.data = _context.sent;
+            return _context.abrupt("break", 34);
+
+          case 22:
+            _context.next = 24;
+            return stageOne.json();
+
+          case 24:
+            response.data = _context.sent;
+            return _context.abrupt("break", 34);
+
+          case 26:
+            _context.next = 28;
+            return stageOne.formData();
+
+          case 28:
+            response.data = _context.sent;
+            return _context.abrupt("break", 34);
+
+          case 30:
+            _context.next = 32;
+            return stageOne.text();
+
+          case 32:
+            response.data = _context.sent;
+            return _context.abrupt("break", 34);
+
+          case 34:
+            return _context.abrupt("return", Promise.resolve(response));
+
+          case 35:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 6]]);
+  }));
+  return _getResponse.apply(this, arguments);
+}
+
 /**
  * - Create a request
  * - Get response
@@ -109,7 +207,7 @@ function _fetchAdapter() {
         switch (_context.prev = _context.next) {
           case 0:
             request = createRequest(config);
-            promiseChain = [call(request, config)];
+            promiseChain = [getResponse(request, config)];
 
             if (config.timeout && config.timeout > 0) {
               promiseChain.push(new Promise(function (res) {

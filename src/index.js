@@ -1,6 +1,7 @@
 import settle from 'axios/lib/core/settle';
 import createError from 'axios/lib/core/createError';
 import createRequest from './createRequest';
+import getResponse from './getResponse';
 
 /**
  * - Create a request
@@ -9,7 +10,7 @@ import createRequest from './createRequest';
  */
 export default async function fetchAdapter(config) {
     const request = createRequest(config);
-    const promiseChain = [call(request, config)];
+    const promiseChain = [getResponse(request, config)];
 
     if (config.timeout && config.timeout > 0) {
         promiseChain.push(
