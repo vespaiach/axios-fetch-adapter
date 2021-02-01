@@ -1,0 +1,35 @@
+{
+    "name": "axios-fetch-adapter",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "build": "rollup -c",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vespaiach/axios-fetch-adapter.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vespaiach/axios-fetch-adapter/issues"
+    },
+    "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
+    "devDependencies": {
+        "axios": "^0.21.1",
+        "@babel/core": "^7.12.10",
+        "@babel/preset-env": "^7.12.11",
+        "@rollup/plugin-babel": "^5.2.3",
+        "@rollup/plugin-node-resolve": "^11.1.1",
+        "babel-jest": "^26.6.3",
+        "jest": "^26.6.3",
+        "rollup": "^2.38.2",
+        "rollup-jest": "^1.1.1"
+    },
+    "peerDependencies": {
+        "axios": "^0.21.1"
+    }
+}
