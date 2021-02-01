@@ -1,8 +1,9 @@
 {
     "name": "axios-fetch-adapter",
     "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
+    "description": "Fetch adapter for axios",
+    "main": "dist/adapter.js",
+    "module": "dist/adapter.es.js",
     "scripts": {
         "build": "rollup -c",
         "test": "jest"
@@ -11,9 +12,13 @@
         "type": "git",
         "url": "git+https://github.com/vespaiach/axios-fetch-adapter.git"
     },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
+    "keywords": [
+        "axios",
+        "adapter",
+        "fetch"
+    ],
+    "author": "nta.toan@gmail.com",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/vespaiach/axios-fetch-adapter/issues"
     },
