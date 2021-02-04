@@ -47,6 +47,10 @@
     };
   }
 
+  /**
+   * This function will create a Request object based on configuration's axios
+   */
+
   function createRequest(config) {
     var headers = new Headers(config.headers); // HTTP basic authentication
 
@@ -97,6 +101,11 @@
 
     return new Request(url, options);
   }
+
+  /**
+   * Fetch API stage two is to get response body. This funtion tries to retrieve
+   * response body based on response's type
+   */
 
   function getResponse(_x, _x2) {
     return _getResponse.apply(this, arguments);
@@ -197,8 +206,8 @@
   }
 
   /**
-   * - Create a request
-   * - Get response
+   * - Create a request object
+   * - Get response body
    * - Check if timeout
    */
 
@@ -234,7 +243,7 @@
                 if (data instanceof Error) {
                   reject(data);
                 } else {
-                  settle__default['default'](resolve, reject, data);
+                  Object.prototype.toString.call(config.settle) === '[object Function]' ? config.settle(resolve, reject, data) : settle__default['default'](resolve, reject, data);
                 }
               }));
 

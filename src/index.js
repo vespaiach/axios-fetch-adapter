@@ -30,7 +30,9 @@ export default async function fetchAdapter(config) {
         if (data instanceof Error) {
             reject(data);
         } else {
-            settle(resolve, reject, data);
+            Object.prototype.toString.call(config.settle) === '[object Function]'
+                ? config.settle(resolve, reject, data)
+                : settle(resolve, reject, data);
         }
     });
 }
