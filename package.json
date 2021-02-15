@@ -6,7 +6,6 @@
     "module": "dist/adapter.es.js",
     "scripts": {
         "build": "rollup -c",
-        "test": "jest",
         "prepublish": "npm run build",
         "release": "np"
     },
