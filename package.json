@@ -2,12 +2,11 @@
     "name": "@vespaiach/axios-fetch-adapter",
     "version": "0.1.1",
     "description": "Fetch adapter for axios",
-    "main": "dist/adapter.js",
-    "module": "dist/adapter.es.js",
+    "main": "index.js",
+    "module": "index.js",
     "scripts": {
-        "build": "rollup -c",
-        "prepublish": "npm run build",
-        "release": "np"
+        "release": "np",
+        "dev": "vite"
     },
     "repository": {
         "type": "git",
@@ -25,19 +24,11 @@
     },
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
-        "@babel/core": "^7.12.10",
-        "@babel/preset-env": "^7.12.11",
-        "@rollup/plugin-babel": "^5.2.3",
-        "@rollup/plugin-node-resolve": "^11.1.1",
-        "axios": "^0.21.1",
-        "babel-jest": "^26.6.3",
-        "jest": "^26.6.3",
+        "axios": "^0.26.1",
         "np": "^7.4.0",
-        "rollup": "^2.38.2",
-        "rollup-jest": "^1.1.1"
+        "vite": "^2.8.0"
     },
     "peerDependencies": {
         "axios": "^0.21.1"
-    },
-    "dependencies": {}
+    }
 }

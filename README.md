@@ -34,3 +34,7 @@ axios.request({
   ...
 })
 ```
+
+# Note
+
+- Since, this adapter relies on fetch API so it won't work in Node environment
