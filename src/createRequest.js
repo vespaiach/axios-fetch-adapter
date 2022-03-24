@@ -11,7 +11,7 @@ export default function createRequest(config) {
     // HTTP basic authentication
     if (config.auth) {
         const username = config.auth.username || '';
-        const password = config.auth.password ? unescape(encodeURIComponent(config.auth.password)) : '';
+        const password = config.auth.password ? decodeURI(encodeURIComponent(config.auth.password)) : '';
         headers.set('Authorization', `Basic ${btoa(username + ':' + password)}`);
     }
 
@@ -36,7 +36,7 @@ export default function createRequest(config) {
         options.integrity = config.redirect;
     }
     if (config.referrer) {
-        options.integrity = config.referrer;
+        options.referrer = config.referrer;
     }
     // This config is similar to XHR’s withCredentials flag, but with three available values instead of two.
     // So if withCredentials is not set, default value 'same-origin' will be used
