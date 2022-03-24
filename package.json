@@ -5,8 +5,6 @@
     "main": "dist/adapter.js",
     "module": "dist/adapter.es.js",
     "scripts": {
-        "build": "rollup -c",
-        "prepublish": "npm run build",
         "release": "np"
     },
     "repository": {
@@ -25,10 +23,7 @@
     },
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
-        "@rollup/plugin-node-resolve": "^11.1.1",
-        "axios": "^0.21.1",
-        "np": "^7.4.0",
-        "rollup": "^2.38.2"
+        "np": "^7.4.0"
     },
     "peerDependencies": {
         "axios": "^0.21.1"
