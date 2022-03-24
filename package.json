@@ -5,7 +5,8 @@
     "main": "index.js",
     "module": "index.js",
     "scripts": {
-        "release": "np"
+        "release": "np",
+        "dev": "vite"
     },
     "repository": {
         "type": "git",
@@ -23,7 +24,9 @@
     },
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
-        "np": "^7.4.0"
+        "axios": "^0.26.1",
+        "np": "^7.4.0",
+        "vite": "^2.8.0"
     },
     "peerDependencies": {
         "axios": "^0.21.1"

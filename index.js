@@ -43,7 +43,7 @@ export default async function fetchAdapter(config) {
  * Fetch API stage two is to get response body. This funtion tries to retrieve
  * response body based on response's type
  */
-export default async function getResponse(request, config) {
+async function getResponse(request, config) {
     let stageOne;
     try {
         stageOne = await fetch(request);
@@ -86,7 +86,7 @@ export default async function getResponse(request, config) {
 /**
  * This function will create a Request object based on configuration's axios
  */
-export default function createRequest(config) {
+function createRequest(config) {
     const headers = new Headers(config.headers);
 
     // HTTP basic authentication
