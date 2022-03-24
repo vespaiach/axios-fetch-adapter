@@ -40,5 +40,5 @@ export default {
         'axios/lib/utils',
         'axios/lib/helpers/buildURL',
     ],
-    plugins: [resolve(), babel({ babelHelpers: 'bundled' })],
+    plugins: [resolve()],
 };

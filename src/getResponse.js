@@ -9,7 +9,7 @@ export default async function getResponse(request, config) {
     try {
         stageOne = await fetch(request);
     } catch (e) {
-        return Promise.reject(createError('Network Error', config, null, request));
+        return createError('Network Error', config, null, request);
     }
 
     const response = {
@@ -41,5 +41,5 @@ export default async function getResponse(request, config) {
         }
     }
 
-    return Promise.resolve(response);
+    return response;
 }
