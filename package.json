@@ -6,6 +6,7 @@
     "module": "index.js",
     "scripts": {
         "release": "np",
+        "test": "echo done",
         "dev": "vite"
     },
     "repository": {
