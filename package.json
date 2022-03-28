@@ -4,6 +4,7 @@
     "description": "Fetch adapter for axios",
     "main": "index.js",
     "module": "index.js",
+    "types": "index.d.ts",
     "scripts": {
         "release": "np",
         "test": "echo done",
