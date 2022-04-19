@@ -11,7 +11,7 @@ import { isUndefined } from 'axios/lib/utils';
  */
 export default async function fetchAdapter(config) {
     const request = createRequest(config);
-    const promiseChain = [getResponse(request, config)];
+    const promiseChain = [getResponse(request.url, request.options, config)];
 
     if (config.timeout && config.timeout > 0) {
         promiseChain.push(
@@ -43,10 +43,10 @@ export default async function fetchAdapter(config) {
  * Fetch API stage two is to get response body. This funtion tries to retrieve
  * response body based on response's type
  */
-async function getResponse(request, config) {
+async function getResponse(url, options, config) {
     let stageOne;
     try {
-        stageOne = await fetch(request);
+        stageOne = await fetch(url, options);
     } catch (e) {
         return createError('Network Error', config, null, request);
     }
@@ -128,6 +128,8 @@ function createRequest(config) {
     const fullPath = buildFullPath(config.baseURL, config.url);
     const url = buildURL(fullPath, config.params, config.paramsSerializer);
 
-    // Expected browser to throw error if there is any wrong configuration value
-    return new Request(url, options);
+    return {
+        url: url,
+        options: options
+    }
 }
