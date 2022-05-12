@@ -26,11 +26,11 @@
     },
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
-        "axios": "^0.26.1",
+        "axios": "^0.27.2",
         "np": "^7.4.0",
         "vite": "^2.8.0"
     },
     "peerDependencies": {
-        "axios": "^0.26.1"
+        "axios": ">=0.26.0"
     }
 }
