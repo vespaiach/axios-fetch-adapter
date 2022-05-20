@@ -114,7 +114,7 @@ function createRequest(config) {
         options.integrity = config.integrity;
     }
     if (config.redirect) {
-        options.integrity = config.redirect;
+        options.redirect = config.redirect;
     }
     if (config.referrer) {
         options.referrer = config.referrer;
