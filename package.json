@@ -27,7 +27,7 @@
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
         "axios": "^0.27.2",
-        "np": "^7.4.0",
+        "np": "^7.6.1",
         "vite": "^2.8.0"
     },
     "peerDependencies": {
