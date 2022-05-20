@@ -1,6 +1,7 @@
 import axios from 'axios';
 import fetchAdapter from '..';
 
+window.axios = axios
 window.onload = async function () {
   try {
     const data = await axios.request({
