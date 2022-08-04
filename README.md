@@ -6,7 +6,7 @@ I'm going to adopt PWA to my web applications and those web apps are heavily usi
 
 You can install the adapter directly from this repository URL or feel free to copy its source code to your project.
 
-```
+``` sh
 npm install axios
 npm install @vespaiach/axios-fetch-adapter
 ```
@@ -15,7 +15,7 @@ There are two ways to use it:
 
 1.  Create a new instance of Axios and pass this adapter in configuration
 
-```
+``` js
 const instance = axios.create({
   baseURL: 'https://some-domain.com/api/',
   timeout: 1000,
@@ -26,7 +26,7 @@ const instance = axios.create({
 
 2.  Pass this adapter in each of request
 
-```
+``` js
 axios.request({
   url: '/user',
   method: 'get',
