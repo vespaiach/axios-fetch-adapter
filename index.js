@@ -103,6 +103,12 @@ function createRequest(config) {
     };
     if (method !== 'GET' && method !== 'HEAD') {
         options.body = config.data;
+
+        // In these cases the browser will automatically set the correct Content-Type,
+        // but only if that header hasn't been set yet. So that's why we're deleting it.
+        if (options.body instanceof FormData || options.body instanceof URLSearchParams) {
+            headers.delete('Content-Type');
+        }
     }
     if (config.mode) {
         options.mode = config.mode;
