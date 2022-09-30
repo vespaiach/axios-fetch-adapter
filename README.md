@@ -35,6 +35,18 @@ axios.request({
 })
 ```
 
+3.  Use with FormData 
+
+``` js
+axios.request({
+  url: '/user',
+  method: 'post',
+  adapter: fetchAdapter
+  data: new FormData(formId)
+  ...
+})
+```
+
 # Note
 
 - Since, this adapter relies on fetch API so it won't work in Node environment

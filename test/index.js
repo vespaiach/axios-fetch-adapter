@@ -14,3 +14,15 @@ window.onload = async function () {
     console.log(e);
   }
 };
+formElem.onsubmit = async (e) => {
+    e.preventDefault();
+
+    let response = await axios.request({
+        url: 'https://httpbin.org/post',
+        method: 'post',
+        data: new FormData(formElem),
+        adapter: fetchAdapter,
+    });
+
+    console.log(response);
+};

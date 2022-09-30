@@ -2,7 +2,7 @@ import axios from 'axios';
 import settle from 'axios/lib/core/settle';
 import buildURL from 'axios/lib/helpers/buildURL';
 import buildFullPath from 'axios/lib/core/buildFullPath';
-import { isUndefined } from 'axios/lib/utils';
+import { isUndefined, isStandardBrowserEnv, isFormData } from 'axios/lib/utils';
 
 /**
  * - Create a request object
@@ -106,7 +106,7 @@ function createRequest(config) {
 
         // In these cases the browser will automatically set the correct Content-Type,
         // but only if that header hasn't been set yet. So that's why we're deleting it.
-        if (options.body instanceof FormData || options.body instanceof URLSearchParams) {
+        if (isFormData(options.body) && isStandardBrowserEnv()) {
             headers.delete('Content-Type');
         }
     }
