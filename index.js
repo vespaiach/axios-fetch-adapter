@@ -47,14 +47,14 @@ async function startFetch(request, config) {
         var abortController = new AbortController()
     } catch (error) {
         return new Promise(async(resolve, reject) => {
-            const rejectTimeout = () => {
+            setTimeout(() => {
                 reject(createTimeoutError())
-            };
-            setTimeout(rejectTimeout, time);
+            }, time);
+
             try {
                 resolve(await fetch(request));
-            } catch(error) {
-                rejectTimeout();
+            } catch (error) {
+                reject(createNetworkError());
             }
         })
     }
