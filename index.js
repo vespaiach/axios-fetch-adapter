@@ -11,31 +11,69 @@ import { isUndefined, isStandardBrowserEnv, isFormData } from 'axios/lib/utils';
  */
 export default async function fetchAdapter(config) {
     const request = createRequest(config);
-    const promiseChain = [getResponse(request, config)];
+    const stageOne = await startFetch(request, config);
+    const data = getResponse(stageOne)
+    const theSettle = config.settle instanceof Function
+        ? config.settle
+        : settle;
+    return new Promise((resolve, reject) => {
+        theSettle(resolve, reject, data);
+    })
+}
 
-    if (config.timeout && config.timeout > 0) {
-        promiseChain.push(
-            new Promise((res) => {
-                setTimeout(() => {
-                    const message = config.timeoutErrorMessage
-                        ? config.timeoutErrorMessage
-                        : 'timeout of ' + config.timeout + 'ms exceeded';
-                    res(createError(message, config, 'ECONNABORTED', request));
-                }, config.timeout);
-            })
-        );
+async function startFetch(request, config) {
+    const createNetworkError = () => {
+        const networkError = createError('Network Error', config, 'ERR_NETWORK', request);
+        return networkError;
     }
 
-    const data = await Promise.race(promiseChain);
-    return new Promise((resolve, reject) => {
-        if (data instanceof Error) {
-            reject(data);
-        } else {
-            Object.prototype.toString.call(config.settle) === '[object Function]'
-                ? config.settle(resolve, reject, data)
-                : settle(resolve, reject, data);
+    if (typeof config.time !== 'number' || isNaN(config.time) || config.time <= 0) {
+        try {
+            return await fetch(request);
+        } catch {
+            throw createNetworkError();
         }
-    });
+    }
+
+    const createTimeoutError = () => {
+        const message = config.timeoutErrorMessage
+        ? config.timeoutErrorMessage
+        : 'timeout of ' + config.timeout + 'ms exceeded';
+        const timeoutError = createError(message, config, 'ECONNABORTED', request);
+        return timeoutError;
+    };
+
+    try {
+        var abortController = new AbortController()
+    } catch (error) {
+        return new Promise(async(resolve, reject) => {
+            setTimeout(() => {
+                reject(createTimeoutError())
+            }, time);
+
+            try {
+                resolve(await fetch(request));
+            } catch (error) {
+                reject(createNetworkError());
+            }
+        })
+    }
+
+    setTimeout(() => {
+        abortController.abort()
+    }, config.timeout);
+
+    try {
+        return await fetch(request, { 
+            signal: abortController.signal
+        });
+    } catch (error) {
+        if (abortController.signal.aborted) {
+            throw createTimeoutError();
+        }
+    
+        throw createNetworkError();
+    }
 }
 
 
@@ -43,14 +81,7 @@ export default async function fetchAdapter(config) {
  * Fetch API stage two is to get response body. This funtion tries to retrieve
  * response body based on response's type
  */
-async function getResponse(request, config) {
-    let stageOne;
-    try {
-        stageOne = await fetch(request);
-    } catch (e) {
-        return createError('Network Error', config, 'ERR_NETWORK', request);
-    }
-
+async function getResponse(stageOne, config) {
     const response = {
         ok: stageOne.ok,
         status: stageOne.status,
@@ -87,6 +118,14 @@ async function getResponse(request, config) {
  * This function will create a Request object based on configuration's axios
  */
 function createRequest(config) {
+    // Fix bug https://stackoverflow.com/questions/39280438/fetch-missing-boundary-in-multipart-form-data-post
+    if (config.data instanceof FormData && config.headers) {
+        const ContentType = 'Content-Type';
+        delete config.headers[ContentType];
+        delete config.headers[ContentType.toLowerCase()];
+        delete config.headers[ContentType.toUpperCase()];
+    }
+
     const headers = new Headers(config.headers);
 
     // HTTP basic authentication
