@@ -47,6 +47,8 @@ axios.request({
 })
 ```
 
-# Note
+# Polyfill Fetch API
 
-- Since, this adapter relies on fetch API so it won't work in Node environment
+This adapter relies on fetch API which requires Node.js 18+, Chrome 42+, Firefox 40+, Safari 10.1+.
+
+For older browsers and Node.js, you need to polyfill fetch with [whatwg-fetch](https://www.npmjs.com/package/whatwg-fetch).
