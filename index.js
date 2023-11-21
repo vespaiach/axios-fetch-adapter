@@ -55,7 +55,7 @@ async function getResponse(request, config) {
         ok: stageOne.ok,
         status: stageOne.status,
         statusText: stageOne.statusText,
-        headers: new Headers(stageOne.headers), // Make a copy of headers
+        headers: Object.fromEntries(stageOne.headers.entries()),
         config: config,
         request,
     };
