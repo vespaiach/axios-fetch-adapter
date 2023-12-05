@@ -49,4 +49,4 @@ axios.request({
 
 # Note
 
-- Since, this adapter relies on fetch API so it won't work in Node environment
+- Node 17.5 or later is required to use this adapter in Node environment.
