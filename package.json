@@ -7,7 +7,7 @@
     "types": "index.d.ts",
     "scripts": {
         "release": "np",
-        "test": "echo done",
+        "test": "vitest",
         "dev": "vite"
     },
     "repository": {
@@ -27,8 +27,10 @@
     "homepage": "https://github.com/vespaiach/axios-fetch-adapter#readme",
     "devDependencies": {
         "axios": "^0.27.2",
+        "mockttp": "^3.9.4",
         "np": "^7.6.1",
-        "vite": "^2.8.0"
+        "vite": "^2.8.0",
+        "vitest": "^1.0.1"
     },
     "peerDependencies": {
         "axios": ">=0.26.0"
